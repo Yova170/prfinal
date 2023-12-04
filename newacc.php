@@ -13,18 +13,33 @@ require 'db.php';
 <body  class="bg-info container d-flex justify-content-center align-items-center vh-100">
     <div class="bg-white p-5 rounded-4">
    
-        <form method="post" action="loginc.php" class="">
+        <form method="post" action="registro.php" class="">
             <div>
-                <h1 class="p-3">Iniciar sesión</h1>
+                <h1 class="p-3">Crear Cuenta</h1>
             </div>
             <div>
                 <input type="text" name="usuario" placeholder="Usuario" required ><br><br>
             </div>
             <div>
-                <input type="password" name="contrasena" placeholder="Contrasena" required><br><br>
+                <input type="text" name="correo" placeholder="Correo" required ><br><br>
+            </div>
+            <div>
+                <input type="password" name="pass" placeholder="Contrasena" required ><br><br>
+            </div>
+            <div>
+                <input type="text" name="nombre" placeholder="Nombre" required ><br><br>
+            </div>
+            <div>
+                <input type="text" name="apellido" placeholder="Apellido" required ><br><br>
+            </div>
+            <div>
+                <input type="text" name="direccion" placeholder="Direccion" required ><br><br>
+            </div>
+            <div>
+            <input type="text"  name="cell" pattern="[0-9]{8}" placeholder="Telefono" required/><br><br>
             </div>
             <div class="text-center">
-                <input clas="imput-center" type="submit" value="Iniciar sesión">
+                <input clas="imput-center" type="submit" value="Registrarse">
             </div>
             
             
@@ -32,7 +47,7 @@ require 'db.php';
         </form>
 
         <div class="text-center p-4">
-            <a href="newacc.php" >Crear Cuenta</a>
+            <a href="login.php" >Iniciar Sesion</a>
         </div>
 
     </div>
