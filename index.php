@@ -16,6 +16,18 @@
                     <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="main/account/micuenta.php">Cuenta</a>
                     </li>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categorias
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Video Juegos</a></li>
+                            <li><a class="dropdown-item" href="#">Celulares</a></li>
+                            <li><a class="dropdown-item" href="#">Televisores</a></li>
+                            <li><a class="dropdown-item" href="#">Electrodomesticos</a></li>
+                            <li><a class="dropdown-item" href="#">Computadoras</a></li>
+                        </ul>
+                        </li>
                     <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Carrito</a>
                     </li>
@@ -60,9 +72,42 @@
             </button>
             </div>
     </div>
-      
+    <br>
     <div id="inicio">
+        <div class="row">
+            <div class="col-sm-4" id="xboxs"> 
+                <div class="card mb-3">
+                    <img src="main/productos/c1/1.jpg" class="card-img-top" alt="Xbox Series S">
+                    <div class="card-body">
+                        <h5 class="card-title">Xbox Series S</h5>
+                        <p class="card-text">La nueva consola de Microsoft, a un precio de locos.</p>
+                        <a href="main/vista/vista.php?id_producto=1" class="btn btn-primary">$ 299.00</a>
+                    </div>
+                </div>
+            </div>
 
+            <div class="col-sm-4" id="ps5">
+                <div class="card mb-3">
+                    <img src="main/productos/c1/2.jpg" class="card-img-top" alt="PlayStation 5">
+                    <div class="card-body">
+                        <h5 class="card-title">PlayStation 5</h5>
+                        <p class="card-text">La PS5 está aquí con un gran catálogo de juegos.</p>
+                        <a href="main/vista/vista.php?id_producto=2" class="btn btn-primary">$ 499.00</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4" id="ns">
+                <div class="card mb-3" >
+                    <img src="main/productos/c1/3.jpg" class="card-img-top" alt="Nintendo Switch">
+                    <div class="card-body">
+                        <h5 class="card-title">Nintendo Switch</h5>
+                        <p class="card-text">La mejor consola portátil del mundo aquí en UTPStore.</p>
+                        <a href="main/vista/vista.php?id_producto=3" class="btn btn-primary">$ 299.00</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 
