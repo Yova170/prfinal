@@ -17,6 +17,7 @@
     $descripcion = $row['descripcion_producto'];
     $img = $row['producto_img'];
     $precio = $row['precio'];
+    $stock = $row['stock'];
 
 ?>
 <body>
@@ -38,11 +39,11 @@
                             Categorias
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Video Juegos</a></li>
-                            <li><a class="dropdown-item" href="#">Celulares</a></li>
-                            <li><a class="dropdown-item" href="#">Televisores</a></li>
-                            <li><a class="dropdown-item" href="#">Electrodomesticos</a></li>
-                            <li><a class="dropdown-item" href="#">Computadoras</a></li>
+                            <li><a class="dropdown-item" href="busquedac.php?cat=1" name="1">Video Juegos</a></li>
+                            <li><a class="dropdown-item" href="busquedac.php?cat=2">Celulares</a></li>
+                            <li><a class="dropdown-item" href="busquedac.php?cat=3">Televisores</a></li>
+                            <li><a class="dropdown-item" href="busquedac.php?cat=4">Electrodomesticos</a></li>
+                            <li><a class="dropdown-item" href="busquedac.php?cat=5">Computadoras</a></li>
                         </ul>
                         </li>
                     <li class="nav-item">
@@ -52,8 +53,8 @@
                     <a class="nav-link disabled" aria-disabled="true"></a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                <form class="d-flex" role="search"  action="busqueda.php">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="busqueda" required>
                     <button class="btn btn-outline-success" type="submit">Buscar</button>
                 </form>
                 </div>
@@ -74,7 +75,22 @@
     </div>
     <br />
     <div id="precio">
-        <h1 ><?php echo $precio; ?></h1>
+        <h1 >USD <?php echo $precio; ?></h1>
     </div>
-    
+    <br />
+
+    <?php
+        if($stock < 1){
+            echo "<h1 class='badge text-bg-danger'> No hay en Stock </h1>";
+        }else{
+            echo " 
+            <div class='d-grid gap-2 d-md-block' id='botonescompra'>
+                <button class='btn btn-primary' type='button'>Comprar</button>
+                <button class='btn btn-primary' type='button'>Agregar al Carrito</button>
+            </div>
+             ";
+        }
+    ?>
+   
+    <br/>
 </body>

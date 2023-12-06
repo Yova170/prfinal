@@ -1,18 +1,27 @@
 <?php
 require '../../db.php';
 require '../ccs/head.php';
-$busqueda = $_GET["busqueda"];
 
+$cat = $_GET["cat"];
 
-$productosPorPagina = 9;
-
-$paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
-
-$offset = ($paginaActual - 1) * $productosPorPagina;
-
-$sql = "SELECT * FROM productos WHERE descripcion_producto LIKE '%$busqueda%' LIMIT $productosPorPagina OFFSET $offset";
+$sql = "SELECT * FROM productos WHERE id_categoria = $cat";
 $result = $conn->query($sql);
 
+$sql1 = "SELECT * FROM categorias WHERE id_categoria = $cat";
+$result1 = $conn->query($sql);
+$row1 = $result1->fetch_assoc();
+
+if($cat ==1){
+    $desc= 'Video Juegos';
+}elseif($cat ==2){
+    $desc= 'Celulares';
+}elseif($cat ==3){
+    $desc= 'Televisores';
+}elseif($cat ==4){
+    $desc= 'Electrodomesticos';
+}elseif($cat ==5){
+    $desc= 'Computadoras';
+}
 
 
 ?>
@@ -40,7 +49,7 @@ $result = $conn->query($sql);
                             <li><a class="dropdown-item" href="busquedac.php?cat=2">Celulares</a></li>
                             <li><a class="dropdown-item" href="busquedac.php?cat=3">Televisores</a></li>
                             <li><a class="dropdown-item" href="busquedac.php?cat=4">Electrodomesticos</a></li>
-                            <li><a class="dropdown-item" href="busquedac.php?cat=5">Computadoras</a></li></li>
+                            <li><a class="dropdown-item" href="busquedac.php?cat=5">Computadoras</a></li>
                         </ul>
                         </li>
                     <li class="nav-item">
@@ -59,7 +68,7 @@ $result = $conn->query($sql);
         </nav>
     </div>
 
-    <h1> Resultado para <?php echo $busqueda; ?></h1>
+    <h1> Resultado para <?php echo $desc; ?></h1>
     <br/>
     <div class="row">
         <?php

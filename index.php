@@ -20,12 +20,12 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Categorias
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Video Juegos</a></li>
-                            <li><a class="dropdown-item" href="#">Celulares</a></li>
-                            <li><a class="dropdown-item" href="#">Televisores</a></li>
-                            <li><a class="dropdown-item" href="#">Electrodomesticos</a></li>
-                            <li><a class="dropdown-item" href="#">Computadoras</a></li>
+                        <ul class="dropdown-menu" >
+                            <li><a class="dropdown-item" href="main/vista/busquedac.php?cat=1" name="1">Video Juegos</a></li>
+                            <li><a class="dropdown-item" href="main/vista/busquedac.php?cat=2">Celulares</a></li>
+                            <li><a class="dropdown-item" href="main/vista/busquedac.php?cat=3">Televisores</a></li>
+                            <li><a class="dropdown-item" href="main/vista/busquedac.php?cat=4">Electrodomesticos</a></li>
+                            <li><a class="dropdown-item" href="main/vista/busquedac.php?cat=5">Computadoras</a></li>
                         </ul>
                         </li>
                     <li class="nav-item">
@@ -35,8 +35,8 @@
                     <a class="nav-link disabled" aria-disabled="true"></a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                <form class="d-flex" role="search" action="main/vista/busqueda.php">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="busqueda">
                     <button class="btn btn-outline-success" type="submit">Buscar</button>
                 </form>
                 </div>
