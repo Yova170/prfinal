@@ -47,7 +47,7 @@
                         </ul>
                         </li>
                     <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Carrito</a>
+                    <a class="nav-link active" aria-current="page" href="../../cart.php">Carrito</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link disabled" aria-disabled="true"></a>
@@ -80,17 +80,27 @@
     <br />
 
     <?php
-        if($stock < 1){
-            echo "<h1 class='badge text-bg-danger'> No hay en Stock </h1>";
-        }else{
-            echo " 
+    if ($stock < 1) {
+        echo "<h1 class='badge text-bg-danger'> No hay en Stock </h1>";
+    } else {
+        echo "
             <div class='d-grid gap-2 d-md-block' id='botonescompra'>
-                <button class='btn btn-primary' type='button'>Comprar</button>
-                <button class='btn btn-primary' type='button'>Agregar al Carrito</button>
+                <form method='post' action=''>
+                    <button class='btn btn-primary' type='submit'>Comprar</button>
+                </form>
             </div>
-             ";
-        }
-    ?>
+            <div class='d-grid gap-2 d-md-block' id='botonescompra'>
+                <form method='post' action='../../cart.php'>
+                    <input type='hidden' name='id_producto' value='$idp'>
+                    <input type='hidden' name='nombre_producto' value='$nombre'>
+                    <input type='hidden' name='precio_producto' value='$precio'>
+                    <input type='hidden' name='add' value='$idp'>
+                    <button class='btn btn-primary' type='submit'>Agregar al Carrito</button>
+                </form>
+            </div>
+        ";
+    }
+?>
    
     <br/>
 </body>

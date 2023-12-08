@@ -53,7 +53,7 @@ if($cat ==1){
                         </ul>
                         </li>
                     <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Carrito</a>
+                    <a class="nav-link active" aria-current="page" href="../../cart.php">Carrito</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link disabled" aria-disabled="true"></a>

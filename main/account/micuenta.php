@@ -29,15 +29,15 @@
                             Categorias
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Video Juegos</a></li>
-                            <li><a class="dropdown-item" href="#">Celulares</a></li>
-                            <li><a class="dropdown-item" href="#">Televisores</a></li>
-                            <li><a class="dropdown-item" href="#">Electrodomesticos</a></li>
-                            <li><a class="dropdown-item" href="#">Computadoras</a></li>
+                            <li><a class="dropdown-item" href="../vista/busquedac.php?cat=1">Video Juegos</a></li>
+                            <li><a class="dropdown-item" href="../vista/busquedac.php?cat=2">Celulares</a></li>
+                            <li><a class="dropdown-item" href="../vista/busquedac.php?cat=3">Televisores</a></li>
+                            <li><a class="dropdown-item" href="../vista/busquedac.php?cat=4">Electrodomesticos</a></li>
+                            <li><a class="dropdown-item" href="../vista/busquedac.php?cat=5">Computadoras</a></li>
                         </ul>
                         </li>
                     <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Carrito</a>
+                    <a class="nav-link active" aria-current="page" href="../../cart.php">Carrito</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link disabled" aria-disabled="true"></a>
@@ -54,6 +54,8 @@
 
         <br />
         <button type="button" onclick="if (confirm('¿Estás seguro de que quieres cerrar la sesión?')) { location.href='logout.php'; }">Cerrar sesión</button>
+        <button type="button" onclick="if (confirm('¿Estás seguro de que quieres cambiar la contrasena?')) { location.href='passx.php'; }">Cambiar Contrasena</button>
+        <button type="button" onclick="if (confirm('¿Estás seguro de que quiere darce baja?')) { location.href='baja.php'; }">Darse de baja</button>
     </body>
 
     
