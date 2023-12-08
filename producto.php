@@ -8,7 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $descripcionProducto = mysqli_real_escape_string($conn, $_POST["descripcion_producto"]);
     $precio = mysqli_real_escape_string($conn, $_POST["precio"]);
     $idMarca = mysqli_real_escape_string($conn, $_POST["id_marca"]);
-    $existencia = mysqli_real_escape_string($conn, $_POST["existencias"]);
+    $existencias = mysqli_real_escape_string($conn, $_POST["existencias"]);
+
 
     // Manejar la imagen (en este caso, asumiremos que estás almacenando el nombre del archivo)
     $imagenProducto = mysqli_real_escape_string($conn, $_FILES["producto_img"]["name"]);
@@ -17,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idCategoria = mysqli_real_escape_string($conn, $_POST["id_categoria"]);
 
     // Insertar el producto en la tabla 'productos'
-    $sqlProducto = "INSERT INTO productos (nombre_producto, descripcion_producto, producto_img, precio, id_categoria, id_marca, existencias) VALUES ('$nombreProducto', '$descripcionProducto', '$imagenProducto', $precio, $idCategoria, $idMarca, $existencia)";
+    $sqlProducto = "INSERT INTO productos (nombre_producto, descripcion_producto, producto_img, precio, id_categoria, id_marca, existencias) VALUES ('$nombreProducto', '$descripcionProducto', '$imagenProducto', $precio, $idCategoria, $idMarca, $existencias)";
     $resultProducto = mysqli_query($conn, $sqlProducto);
 
     if ($resultProducto) {
@@ -81,8 +82,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             ?>
         </select><br>
-        <label for="existencia">Existencias:</label>
-        <input type="text" name="existencia" required><br>
+        <label for="existencias">Existencias:</label>
+        <input type="text" name="existencias" required><br>
         <input type="submit" value="Agregar Producto">
     </form>
 </body>
