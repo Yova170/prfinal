@@ -5,7 +5,7 @@ session_start();
     $user=$_POST['usuario'];
     $pass= $_POST['contrasena'];
 
-    $validar = mysqli_query($conn, "SELECT * FROM `clientes` WHERE usuario='$user' and contrasena='$pass' ");
+    $validar = mysqli_query($conn, "SELECT * FROM `administradores` WHERE usuario='$user' and contrasena='$pass' ");
 
     if(mysqli_num_rows($validar)> 0 ){
         $row = mysqli_fetch_assoc($validar);

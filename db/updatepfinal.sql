@@ -1,4 +1,5 @@
 
+
 ALTER TABLE `productos`
 MODIFY COLUMN `producto_img` MEDIUMBLOB;
 
