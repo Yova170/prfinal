@@ -16,8 +16,6 @@ $cell = $_POST['cell'];
 $sql = "INSERT INTO `clientes` (`cod_usuario`, `usuario`, `correo`, `contrasena`, `nombre`, `apellido`, `direccion`, `telefono`) VALUES (NULL, '$usuario', '$correo', '$pass', '$nombre', '$apellido', '$direccion', '$cell');";
 $result = mysqli_query($conn, $sql);
 
-
-echo $phone;
 if($result){
     echo'<script>
     alert("Usuario Registrado con exito");
