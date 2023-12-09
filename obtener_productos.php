@@ -2,26 +2,20 @@
 require 'db.php';
 
 // Obtén la categoría de la solicitud GET
-$category = isset($_GET['category']) ? $_GET['category'] : '';
+$category = isset($_GET['category']) ? mysqli_real_escape_string($conn, $_GET['category']) : '';
 
 // Define la cantidad de productos por página
-$productsPerPage = 20;
+$productsPerPage = 1;
 
 // Calcula el inicio y fin de la selección basándote en la página actual
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $startFrom = ($page - 1) * $productsPerPage;
 
-// Realiza la consulta SQL para obtener productos según la categoría y paginación
-$sql = "SELECT id_producto, nombre_producto, producto_img, existencias, precio FROM productos";
-
-// Agrega la condición de la categoría si se proporciona
-if (!empty($category)) {
-    $sql .= " WHERE id_categoria = '$category'";
-}
-
-$sql .= " LIMIT $startFrom, $productsPerPage";
-
-$result = mysqli_query($conn, $sql);
+// Usar una consulta preparada
+$stmt = $conn->prepare("SELECT id_producto, nombre_producto, producto_img, existencias, precio FROM productos WHERE id_categoria = ? LIMIT ?, ?");
+$stmt->bind_param("sii", $category, $startFrom, $productsPerPage);
+$stmt->execute();
+$result = $stmt->get_result();
 
 // Inicializa el HTML de productos
 $productsHtml = '';
@@ -61,6 +55,11 @@ function getPaginationHtml($conn, $category, $productsPerPage)
     }
 
     $resultTotal = mysqli_query($conn, $sqlTotal);
+
+    if (!$resultTotal) {
+        die('Error en la consulta de total de productos: ' . $conn->error);
+    }
+
     $rowTotal = mysqli_fetch_assoc($resultTotal);
 
     // Calcula el total de páginas

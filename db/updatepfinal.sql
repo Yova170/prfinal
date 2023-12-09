@@ -23,4 +23,7 @@ MODIFY COLUMN id_producto INT AUTO_INCREMENT;
 ALTER TABLE marcas
 MODIFY COLUMN id_marca INT AUTO_INCREMENT;
 
+ALTER TABLE administradores
+ADD COLUMN correo varchar(50);
+
 commit;
