@@ -100,8 +100,6 @@ if ($result) {
 </head>
 
 <body>
-
-<body>
     
     <?php include 'main/html/superiorBar.php'?>
     <!-- Carrusel de Imágenes -->
@@ -137,35 +135,38 @@ if ($result) {
 <!-- Lista de Productos -->
 <h2 class="text-center mt-3">Lista de Productos</h2>
 
-<div class="row justify-content-center">
+    <!-- Contenedor de productos que se actualizará con AJAX -->
+    <div id="productos-container" class="row justify-content-center">
         <?php
-        // Muestra los productos de la página actual
-        while ($row = $result->fetch_assoc()) {
-        echo '<div class="col-md-3 mb-4">';
-        echo '<div class="card h-100">';
-
-        // Ruta completa de la imagen
-        $imagePath = 'img/productos/' . $row["producto_img"];
-        echo '<img src="' . $imagePath . '" class="card-img-top" alt="' . $row["nombre_producto"] . '">';
-
-        echo '<div class="card-body d-flex flex-column">';
-        echo '<div class="d-flex justify-content-between mb-2">';
-        // Etiqueta azul con el nombre de la marca a la izquierda
-        echo '<span class="badge badge-primary etiqueta-azul">' . $row["stock"] . '</span>';
-        // Etiqueta gris con el precio a la derecha
-        echo '<span class="badge badge-secondary etiqueta-gris">$' . $row["precio"] . '</span>';
-        echo '</div>';
-        echo '<h5 class="card-title">' . $row["nombre_producto"] . '</h5>';
-        echo '<p class="card-text">Unidades Disponibles: ' . $row["stock"] . '</p>';
-        // Botón verde de "Agregar al Carrito"
-        echo '<button class="btn btn-success mt-auto" onclick="agregarAlCarrito(' . $row["id_producto"] . ')">Agregar al Carrito</button>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-    }
-    ?>
-</div>
-    
+  
+                // Muestra los productos de la página actual
+            while ($row = $result->fetch_assoc()) {
+                echo '<div class="col-md-3 mb-4">';
+                echo '<div class="card h-100">';
+        
+                // Ruta completa de la imagen
+                $imagePath = 'img/productos/' . $row["producto_img"];
+                echo '<img src="' . $imagePath . '" class="card-img-top" alt="' . $row["nombre_producto"] . '">';
+        
+                echo '<div class="card-body d-flex flex-column">';
+                echo '<div class="d-flex justify-content-between mb-2">';
+                // Etiqueta azul con el nombre de la marca a la izquierda
+                echo '<span class="badge badge-primary etiqueta-azul">' . $row["stock"] . '</span>';
+                // Etiqueta gris con el precio a la derecha
+                echo '<span class="badge badge-secondary etiqueta-gris">$' . $row["precio"] . '</span>';
+                echo '</div>';
+                echo '<h5 class="card-title">' . $row["nombre_producto"] . '</h5>';
+                echo '<p class="card-text">Unidades Disponibles: ' . $row["stock"] . '</p>';
+                // Botón verde de "Agregar al Carrito"
+                echo '<button class="btn btn-success mt-auto" onclick="agregarAlCarrito(' . $row["id_producto"] . ')">Agregar al Carrito</button>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+            }
+ 
+        
+        ?>
+    </div>    
 
 <link rel="stylesheet" href="main/ccs/paginacion.css">
     <!-- Paginación Bootstrap -->
@@ -180,6 +181,11 @@ if ($result) {
     </nav>
 </div>
 
+
+
+
+
+
     <!-- Agregamos jQuery y Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
@@ -193,6 +199,27 @@ if ($result) {
         alert("Producto agregado al carrito: " + idProducto);
     }
 </script>
+
+<script>
+        $(document).ready(function () {
+            // Manejar clic en una categoría
+            $('.categoria').click(function (e) {
+                e.preventDefault();
+                var categoriaId = $(this).data('id');
+
+                // Realizar una solicitud AJAX para obtener productos de la categoría seleccionada y página actual
+                $.ajax({
+                    type: 'GET',
+                    url: 'obtener_productos.php',
+                    data: { categoriaId: categoriaId, pagina: <?php echo $paginaActual; ?> }, // Página actual
+                    success: function (data) {
+                        // Actualizar el contenido del contenedor de productos con los datos recibidos
+                        $('#productos-container').html(data);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 
