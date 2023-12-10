@@ -1,15 +1,15 @@
+
 <div id="BarraSuperior">
-        <!-- Tu barra de navegación superior -->
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">UTPStore</a>
+                <a class="navbar-brand" href="index.php">UTPStore</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Cuenta</a>
+                            <a class="nav-link active" aria-current="page" href="micuenta.php">Cuenta</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categoría</a>
@@ -21,13 +21,14 @@
 
                                 // Mostrar opciones en el menú desplegable
                                 while ($row = mysqli_fetch_assoc($resultCategorias)) {
-                                    echo "<li><a class='dropdown-item categoria' href='#' data-id='{$row['id_categoria']}'>{$row['nombre_categoria']}</a></li>";
+                                    echo "<li><a class='dropdown-item' href='#' data-id='{$row['id_categoria']}'>{$row['nombre_categoria']}</a></li>";
                                 }
+                                
                                 ?>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Carrito</a>
+                            <a class="nav-link active" aria-current="page" href="cart.php">Carrito</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" aria-disabled="true"></a>
@@ -41,5 +42,4 @@
             </div>
         </nav>
     </div>
-
 
