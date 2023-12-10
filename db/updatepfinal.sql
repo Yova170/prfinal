@@ -33,5 +33,11 @@ ALTER TABLE `productos`
     ADD CONSTRAINT `fk_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`),
     ADD CONSTRAINT `fk_marca` FOREIGN KEY (`id_marca`) REFERENCES `marcas` (`id_marca`);
 
+CREATE TABLE `configuracion` (
+  `id_configuracion` int(11) AUTO_INCREMENT PRIMARY KEY,
+  `valor_iva` decimal(5,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO configuracion (valor_iva) VALUES (0.00);
 
 commit;

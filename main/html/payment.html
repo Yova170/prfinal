@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso de Pago</title>
+    <!-- CSS de Bootstrap (última versión estable) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <!-- Scripts de Bootstrap y dependencias (jQuery y Popper.js) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofRhiBwgiFfA5SII2tC5EAMFkgFJXI1LZl"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyWlR8E/EQFhNJeGr5p8Xtbs1jKG62h0bl"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+        integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../ccs/payment.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Contenido de la factura -->
+                        <div class="invoice-title">
+                            <h4 class="float-end font-size-15">Detalles de Pago</h4>
+                            <div class="mb-4">
+                                <h2 class="mb-1 text-muted">Nombre de tu Tienda</h2>
+                            </div>
+                            <div class="text-muted">
+                                <p class="mb-1">Dirección de tu Tienda</p>
+                                <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i> correo@tutienda.com</p>
+                                <p><i class="uil uil-phone me-1"></i> 012-345-6789</p>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="text-muted">
+                                    <h5 class="font-size-16 mb-3">Facturado a:</h5>
+                                    <h5 class="font-size-15 mb-2">Nombre del Cliente</h5>
+                                    <p class="mb-1">Dirección del Cliente</p>
+                                    <p class="mb-1">cliente@correo.com</p>
+                                    <p>001-234-5678</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="text-muted text-sm-end">
+                                    <div>
+                                        <h5 class="font-size-15 mb-1">Número de Factura:</h5>
+                                        <p>#DS0204</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h5 class="font-size-15 mb-1">Fecha de Factura:</h5>
+                                        <p>Fecha Actual</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h5 class="font-size-15 mb-1">Número de Orden:</h5>
+                                        <p>#1123456</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="py-2">
+                            <h5 class="font-size-15">Resumen de la Orden</h5>
+                            <div class="table-responsive">
+                                <table class="table align-middle table-nowrap table-centered mb-0">
+                                    <!-- Aquí irá el contenido generado dinámicamente desde micarrito.php -->
+                                </table>
+                            </div>
+                            <div class="d-print-none mt-4">
+                                <div class="float-end">
+                                    <a href="javascript:window.print()" class="btn btn-success me-1"><i
+                                            class="fa fa-print"></i></a>
+                                    <a href="#" class="btn btn-primary w-md">Enviar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agrega la referencia a tu archivo payment.js -->
+    <script src="../js/payment.js"></script>
+</body>
+
+</html>

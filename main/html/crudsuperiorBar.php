@@ -20,6 +20,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="marca.php">Marcas</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="configuracion.php">Configuracion</a>
+                    </li>
                 </ul>
                 <form class="d-flex" role="search" action="main/vista/busqueda.php">
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="busqueda">
