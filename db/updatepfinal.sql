@@ -40,4 +40,19 @@ CREATE TABLE `configuracion` (
 
 INSERT INTO configuracion (valor_iva) VALUES (0.00);
 
+
+CREATE TABLE `clientes_empresariales` (
+  `id_cliente` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `cod_usuario` int(11) NOT NULL,
+  `usuario` varchar(50) DEFAULT NULL,
+  `correo` varchar(40) NOT NULL,
+  `contrasena` varchar(255) DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `apellido` varchar(100) DEFAULT NULL,
+  `direccion` text DEFAULT NULL,
+  `telefono` varchar(15) DEFAULT NULL,
+  FOREIGN KEY (`cod_usuario`) REFERENCES `clientes` (`cod_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 commit;

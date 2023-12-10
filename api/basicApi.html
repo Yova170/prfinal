@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Productos</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        #resultContainer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="mt-4">Consulta de Productos</h1>
+
+    <form id="productForm" class="mt-4">
+        <div class="form-group">
+            <label for="clientId">ID del Cliente Empresarial:</label>
+            <input type="text" class="form-control" id="clientId" name="clientId" required>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="getProducts()">Obtener Productos</button>
+    </form>
+
+    <div id="resultContainer" class="mt-4">
+        <!-- Los resultados se mostrarán aquí -->
+    </div>
+</div>
+
+<!-- Bootstrap JS y jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+function getProducts() {
+    var clientId = $("#clientId").val();
+
+    $.ajax({
+        url: "api.php",
+        type: "GET",
+        data: { client_id: clientId },
+        success: function(response) {
+            displayProducts(response);
+        },
+        error: function(error) {
+            $("#resultContainer").html("<p class='text-danger'>Error al obtener productos.</p>");
+        }
+    });
+}
+
+function displayProducts(products) {
+    var resultHtml = "<h2 class='mt-4'>Productos:</h2>";
+
+    if (products && products.length > 0) {
+        resultHtml += "<ul class='list-group'>";
+        products.forEach(function(product) {
+            resultHtml += "<li class='list-group-item'>" + product.name + " - Precio: $" + product.price + " - Stock: " + product.stock + "</li>";
+        });
+        resultHtml += "</ul>";
+    } else {
+        resultHtml += "<p class='mt-4'>No se encontraron productos para el cliente dado.</p>";
+    }
+
+    $("#resultContainer").html(resultHtml);
+}
+</script>
+
+</body>
+</html>
