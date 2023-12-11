@@ -1,87 +1,77 @@
 <?php
 require '../../db.php';
 require '../ccs/head.php';
-$busqueda = $_GET["busqueda"];
 
-
+// Definir variables para paginación
 $productosPorPagina = 9;
-
 $paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
-
 $offset = ($paginaActual - 1) * $productosPorPagina;
 
-$sql = "SELECT * FROM productos WHERE descripcion_producto LIKE '%$busqueda%' LIMIT $productosPorPagina OFFSET $offset";
+// Obtener el término de búsqueda
+$busqueda = isset($_GET["busqueda"]) ? $_GET["busqueda"] : '';
+
+// Consultar productos y categorías que coincidan con la búsqueda
+$sql = "SELECT p.*, c.nombre_categoria
+        FROM productos p
+        LEFT JOIN categorias c ON p.id_categoria = c.id_categoria
+        WHERE p.nombre_producto LIKE '%$busqueda%' OR p.descripcion_producto LIKE '%$busqueda%' OR c.nombre_categoria LIKE '%$busqueda%'
+        LIMIT $productosPorPagina OFFSET $offset";
+
 $result = $conn->query($sql);
-
-
-
 ?>
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Búsqueda</title>
+    <!-- Enlace al archivo CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
 <body>
-    <div id="Barra Superior">
-         <nav class="navbar navbar-expand-lg bg-body-tertiary">
-             <div class="container-fluid">
-                <a class="navbar-brand" href="../../index.php">UTPStore</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="../account/micuenta.php">Cuenta</a>
-                    </li>
-                    <li class="nav-item">
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categorias
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="busquedac.php?cat=1" name="1">Video Juegos</a></li>
-                            <li><a class="dropdown-item" href="busquedac.php?cat=2">Celulares</a></li>
-                            <li><a class="dropdown-item" href="busquedac.php?cat=3">Televisores</a></li>
-                            <li><a class="dropdown-item" href="busquedac.php?cat=4">Electrodomesticos</a></li>
-                            <li><a class="dropdown-item" href="busquedac.php?cat=5">Computadoras</a></li></li>
-                        </ul>
-                        </li>
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="../../cart.php">Carrito</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true"></a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search"  action="busqueda.php">
-                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="busqueda" required>
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
-                </form>
-                </div>
-            </div>
-        </nav>
+
+    <div id="BarraSuperior" class="bg-light">
+        <!-- Barra de navegación, si es necesario -->
     </div>
 
-    <h1> Resultado para <?php echo $busqueda; ?></h1>
-    <br/>
-    <div class="row">
-        <?php
-            if($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "
-                    <div class='col-sm-4'> 
-                        <div class='card mb-3'>
-                            <img src='" . $row['producto_img'] ."' class='card-img-top'>
-                            <div class='card-body'>
-                                <h5 class='card-title'>" . $row['nombre_producto'] ."</h5>
-                                <a href='vista.php?id_producto=" . $row['id_producto'] ."' class='btn btn-primary'>$ " . $row['precio'] ."</a>
+    <div class="container mt-4">
+        <h1>Resultados de Búsqueda</h1>
+
+        <div class="row">
+            <?php
+                if ($result && $result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "
+                        <div class='col-md-4 mb-4'> 
+                            <div class='card'>
+                                <img src='" . $row['producto_img'] ."' class='card-img-top'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>" . $row['nombre_producto'] ."</h5>
+                                    <p class='card-text'>" . $row['descripcion_producto'] . "</p>
+                                    <p class='card-text'>Categoría: " . $row['nombre_categoria'] . "</p>
+                                    <a href='vista.php?id_producto=" . $row['id_producto'] ."' class='btn btn-primary'>$ " . $row['precio'] ."</a>
+                                </div>
                             </div>
-                        </div>
-                    </div>";
+                        </div>";
+                    }
+                } else {
+                    echo "<div class='col-md-12'>
+                            <div class='alert alert-info' role='alert'>
+                                No se encontraron productos con la palabra '$busqueda' en la descripción o categoría.
+                            </div>
+                        </div>";
                 }
-            }else {
-            echo "<h2>No se encontraron productos con la palabra '$busqueda' en la descripción.</h2>";
-            }
             ?>
+        </div>
     </div>
-            
-    
-  
+
+    <!-- Enlaces a los scripts de Bootstrap y jQuery (necesarios para el funcionamiento de Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Agrega aquí cualquier otro contenido que desees mostrar -->
+
 </body>
+</html>

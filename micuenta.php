@@ -1,5 +1,5 @@
 <?php
-require 'db.php'; // Asegúrate de ajustar la ruta según tu estructura de archivos
+require 'db.php';
 session_start();
 
 if (!isset($_SESSION['usuario'])) {
@@ -7,19 +7,34 @@ if (!isset($_SESSION['usuario'])) {
 } else {
     $nomuser = $_SESSION['usuario'];
 
-    // Consultar la información del administrador desde la base de datos
-    $sql = "SELECT * FROM administradores WHERE usuario = '$nomuser'";
-    $result = mysqli_query($conn, $sql);
+    // Verificar la conexión a la base de datos
+    if (!$conn) {
+        die("Error de conexión: " . mysqli_connect_error());
+    }
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $administrador = mysqli_fetch_assoc($result);
+    // Consultar la información del administrador desde la base de datos
+    $sqlAdmin = "SELECT * FROM administradores WHERE usuario = '$nomuser'";
+    $resultAdmin = mysqli_query($conn, $sqlAdmin);
+
+    // Consultar la información del cliente si no es un administrador
+    if ($resultAdmin && mysqli_num_rows($resultAdmin) > 0) {
+        $usuarioData = mysqli_fetch_assoc($resultAdmin);
     } else {
-        // Manejo del error si no se encuentra el administrador
-        echo "Error al obtener la información del administrador.";
-        exit;
+        // Consultar la información del cliente
+        $sqlCliente = "SELECT * FROM clientes WHERE usuario = '$nomuser'";
+        $resultCliente = mysqli_query($conn, $sqlCliente);
+
+        if ($resultCliente && mysqli_num_rows($resultCliente) > 0) {
+            $usuarioData = mysqli_fetch_assoc($resultCliente);
+        } else {
+            // Manejo del error si no se encuentra ni administrador ni cliente
+            echo "Error al obtener la información del usuario: " . mysqli_error($conn);
+            exit;
+        }
     }
 }
 ?>
+
 <html>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <!-- Agregamos Bootstrap para el diseño -->
@@ -44,9 +59,38 @@ if (!isset($_SESSION['usuario'])) {
                             <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                         </div>
                         <div class="author-card-details">
-                            <h5 class="author-card-name text-lg"><?php echo $administrador['nombre']," ", $administrador['apellido']; ?></h5>
-                            <span class="author-card-position"><?php echo $administrador['direccion']; ?></span>
-                        </div>
+                            <h5 class="author-card-name text-lg">
+                                <?php
+                                    if (isset($administrador)) {
+                                        echo $administrador['nombre'], " ", $administrador['apellido'];
+                                    } else {
+                                        // Aquí puedes manejar la lógica para el cliente
+                                        $sqlCliente = "SELECT * FROM clientes WHERE usuario = '$nomuser'";
+                                        $resultCliente = mysqli_query($conn, $sqlCliente);
+
+                                        if ($resultCliente && mysqli_num_rows($resultCliente) > 0) {
+                                            $cliente = mysqli_fetch_assoc($resultCliente);
+                                            echo $cliente['nombre'], " ", $cliente['apellido'];
+                                        } else {
+                                            echo "Nombre del Usuario";
+                                        }
+                                    }
+                                ?>
+                            </h5>
+                            <span class="author-card-position">
+                                <?php
+                                    if (isset($administrador)) {
+                                        echo $administrador['direccion'];
+                                    } else {
+                                        // Aquí puedes manejar la lógica para el cliente
+                                        if (isset($cliente)) {
+                                            echo $cliente['direccion'];
+                                        } else {
+                                            echo "Dirección del Usuario";
+                                        }
+                                    }
+                                ?>
+                            </span></div>
                     </div>
                 </div>
             <div class="wizard">

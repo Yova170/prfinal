@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require '../db.php';
 require 'controllers/ProductController.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

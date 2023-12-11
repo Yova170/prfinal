@@ -16,8 +16,8 @@ class ProductModel {
             Response::sendNotFoundResponse('Cliente no encontrado');
         }
 
-        // Ejemplo de consulta SQL para obtener productos de un cliente específico
-        $query = "SELECT * FROM productos WHERE id_cliente = ?";
+       
+        $query = "SELECT * FROM clientes_empresariales WHERE id_cliente = ?";
 
         // Preparar la consulta
         $stmt = $this->conn->prepare($query);
@@ -54,7 +54,7 @@ class ProductModel {
         // Verificar la existencia del cliente según tu lógica
         // Puedes hacer una consulta a la tabla 'clientes' para verificar si el cliente con el ID dado existe.
         // Devuelve true si existe, false si no.
-        $query = "SELECT id_cliente FROM clientes WHERE id_cliente = ?";
+        $query = "SELECT id_cliente FROM clientes_empresariales WHERE id_cliente = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param("i", $clientId);
         $stmt->execute();

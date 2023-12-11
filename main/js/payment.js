@@ -1,29 +1,29 @@
-$(document).ready(function () {
-    function calcularTotal() {
-        // Obtener el subtotal desde algún lugar (por ejemplo, un carrito de compras)
-        var subtotal = 732.50; // Cambia esto según tus necesidades
+// payment.js
 
-        // Obtener el valor del IVA desde la base de datos mediante una solicitud AJAX
-        $.ajax({
-            url: '../config/obtener_iva.php', // Crea este archivo para obtener el valor del IVA
-            type: 'GET',
-            success: function (data) {
-                var iva = subtotal * (parseFloat(data) / 100);
+// Esta función se encarga de actualizar los montos mostrados en la página
+function actualizarMontos(subtotal, iva, total) {
+    document.getElementById('subtotalAmount').textContent = subtotal.toFixed(2);
+    document.getElementById('ivaAmount').textContent = iva.toFixed(2);
+    document.getElementById('totalAmount').textContent = total.toFixed(2);
+    document.getElementById('totalAmountDisplay').textContent = 'Total: $' + total.toFixed(2);
+}
 
-                // Calcular el total
-                var total = subtotal + iva;
+// Esta función se llama cuando se hace clic en el botón de pago
+function realizarPago() {
 
-                // Mostrar los resultados en los campos de texto
-                document.getElementById('subtotal').innerHTML = '$' + subtotal.toFixed(2);
-                document.getElementById('iva').innerHTML = '$' + iva.toFixed(2);
-                document.getElementById('total').innerHTML = '$' + total.toFixed(2);
-            },
-            error: function () {
-                console.log('Error al obtener el valor del IVA.');
-            }
-        });
-    }
+    alert('Pago realizado con éxito. ¡Gracias por su compra!');
+    
+    // Redireccionar a la página de factura
+    window.location.href = 'factura.php'; // Ajusta la URL según tu estructura de archivos
+}
 
-    // Llama a la función calcularTotal cuando se cargue la página
-    calcularTotal();
+// Esta función se llama cuando se carga la página
+$(document).ready(function() {
+    // Aquí puedes agregar cualquier lógica adicional que necesites al cargar la página
+
+    // Ejemplo: Obtener los detalles de la compra desde PHP
+    var detallesCompra = json_encode($detallesCompra); 
+    
+    // Actualizar montos en la página
+    actualizarMontos(detallesCompra.subtotal, detallesCompra.iva, detallesCompra.total);
 });

@@ -157,8 +157,8 @@ if ($result) {
                 echo '</div>';
                 echo '<h5 class="card-title">' . $row["nombre_producto"] . '</h5>';
                 echo '<p class="card-text">Unidades Disponibles: ' . $row["stock"] . '</p>';
-                // Botón verde de "Agregar al Carrito"
-                echo '<button class="btn btn-success mt-auto" onclick="agregarAlCarrito(' . $row["id_producto"] . ')">Agregar al Carrito</button>';
+          
+                echo '<button class="btn btn-success mt-auto" onclick="agregarAlCarrito(' . $row["id_producto"] . ')">Ver</button>';
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
@@ -181,11 +181,6 @@ if ($result) {
     </nav>
 </div>
 
-
-
-
-
-
     <!-- Agregamos jQuery y Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
@@ -193,12 +188,41 @@ if ($result) {
 
 <!-- Otro Script si es necesario -->
 <script>
-    function agregarAlCarrito(idProducto) {
-        // Lógica para agregar el producto al carrito
-        // Puedes utilizar JavaScript o enviar una solicitud AJAX a un script PHP separado
-        alert("Producto agregado al carrito: " + idProducto);
+    function agregarAlCarrito(idProducto, nombreProducto, precioProducto) {
+        // Crear un formulario dinámicamente
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'cart.php'; // Ruta al script que manejará la lógica de agregar al carrito
+
+        // Crear un input para cada dato del producto
+        var inputId = document.createElement('input');
+        inputId.type = 'hidden';
+        inputId.name = 'id_producto';
+        inputId.value = idProducto;
+
+        var inputNombre = document.createElement('input');
+        inputNombre.type = 'hidden';
+        inputNombre.name = 'nombre_producto';
+        inputNombre.value = nombreProducto;
+
+        var inputPrecio = document.createElement('input');
+        inputPrecio.type = 'hidden';
+        inputPrecio.name = 'precio_producto';
+        inputPrecio.value = precioProducto;
+
+        // Agregar los inputs al formulario
+        form.appendChild(inputId);
+        form.appendChild(inputNombre);
+        form.appendChild(inputPrecio);
+
+        // Agregar el formulario al cuerpo del documento
+        document.body.appendChild(form);
+
+        // Enviar el formulario
+        form.submit();
     }
 </script>
+
 
 <script>
         $(document).ready(function () {
